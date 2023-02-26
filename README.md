@@ -120,3 +120,7 @@ following steps to get setup.
   ```
 
 After this `poetry-no-cap` will be available for you to run on your python projects.
+
+## Contributing
+
+Contributions to this project are welcome. If you are interesting in contributing please see our [contributing guide](CONTRIBUTING.md)
