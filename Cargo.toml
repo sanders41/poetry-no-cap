@@ -1,5 +1,5 @@
 [package]
-name = "poetry_no_cap_cli"
+name = "poetry-no-cap"
 version = "0.0.1"
 edition = "2021"
 authors = ["Paul Sanders <psanders1@gmail.com>"]
