@@ -24,7 +24,6 @@ format.
 
 ```toml
 [tool.poetry.dependencies]
-...
 meilisearch-python-async = ">=1.0.0"
 ```
 
@@ -39,7 +38,6 @@ format.
 
 ```toml
 [tool.poetry.dependencies]
-...
 meilisearch-python-async = "1.0.0"
 ```
 
@@ -57,7 +55,6 @@ format.
 
 ```toml
 [tool.poetry.dependencies]
-...
 camel-converter = {version = ">=3.0.0", extras = ["pydantic"]}
 ```
 
@@ -75,7 +72,6 @@ format.
 
 ```toml
 [tool.poetry.dependencies]
-...
 camel-converter = {version = "3.0.0", extras = ["pydantic"]}
 ```
 
