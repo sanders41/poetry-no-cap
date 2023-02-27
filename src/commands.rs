@@ -39,4 +39,14 @@ pub enum SubCommand {
         )]
         pin: bool,
     },
+
+    /// Update installed dependencies
+    Update {
+        #[clap(
+            short,
+            long,
+            help = "If set the pyproject.toml file will be updated to pin dependencies"
+        )]
+        pin: bool,
+    },
 }

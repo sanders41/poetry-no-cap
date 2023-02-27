@@ -82,6 +82,54 @@ pub fn fix(dry_run: bool, pin: bool) {
     }
 }
 
+/// Update depdendencies and remove the upper bound cap.
+pub fn update(pin: bool) {
+    match is_poetry_project() {
+        Ok(v) => {
+            if !v {
+                eprintln!("\nThis project does not appear to be using Poetry");
+                exit(1);
+            }
+        }
+        Err(err) => {
+            eprintln!("Error checking the pyproject.toml file: {}", err);
+            exit(1);
+        }
+    }
+
+    println!(
+        "\nRemoving caps from pyproject.toml file to ensure nothing is capped durring update\n"
+    );
+    if let Err(err) = recreate_pyproject(false, pin) {
+        eprintln!("{err}");
+        exit(1);
+    };
+
+    println!("Running poetry update\n");
+    match run_poetry_update() {
+        Ok(_) => println!("poetry update complete\n"),
+        Err(err) => {
+            eprint!("Error with updating dependencies: {err}");
+            exit(1);
+        }
+    };
+
+    println!("Removing caps from pyproject.toml file");
+    if let Err(err) = recreate_pyproject(false, pin) {
+        eprintln!("{err}");
+        exit(1);
+    };
+
+    println!("\nUpdating poetry.lock file\n");
+    match run_poetry_lock() {
+        Ok(_) => println!("\npoetry lock complete\n"),
+        Err(err) => {
+            eprint!("Error updating lock file: {err}");
+            exit(1);
+        }
+    };
+}
+
 fn run_poetry_add(full_args: Vec<&str>) -> Result<()> {
     let mut poetry_add = Command::new("poetry").args(full_args).spawn()?;
     poetry_add.wait()?;
@@ -94,6 +142,13 @@ fn run_poetry_lock() -> Result<()> {
         .args(["lock", "--no-update"])
         .spawn()?;
     poetry_lock.wait()?;
+
+    Ok(())
+}
+
+fn run_poetry_update() -> Result<()> {
+    let mut poetry_update = Command::new("poetry").args(["update"]).spawn()?;
+    poetry_update.wait()?;
 
     Ok(())
 }
