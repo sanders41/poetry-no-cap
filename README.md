@@ -3,7 +3,7 @@
 ![Tests Status](https://github.com/sanders41/poetry-no-cap/workflows/Testing/badge.svg?branch=main&event=push)
 
 [Poetry](https://github.com/python-poetry/poetry) is a packaging and dependency management tool for
-python projects that I like to use, I want to handle my depenence versioning differntly and there
+python projects that I like to use, but I want to handle my depenence versioning differntly and there
 isn't a good way to do that. using `poetry add ...` adds dendencies with capped upper bounds. This
 can cause unnecessary dependency conflicts for libraries, so I want to specify no upper bounds. Then
 for applications I want to pin specific versions of packages rather than giving a range. This package
